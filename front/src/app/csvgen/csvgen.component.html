@@ -1,0 +1,10 @@
+<div>
+    <label>Separator:
+      <input [(ngModel)]="csvgen.separator" placeholder="separator"/>
+    </label>
+    <label>TableName:
+        <input [(ngModel)]="csvgen.TableName" placeholder="TableName"/>
+    </label>
+    <button class="import"
+    (click)="import()">import</button>
+</div>
