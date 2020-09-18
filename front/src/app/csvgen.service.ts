@@ -28,11 +28,11 @@ export class CsvgenService {
   }
 
   /** POST: post csv file to generate Table */
-  import(csvgen: CsvGen): Observable<any> {
-    return this.http.post(this.csvgenUrl+'/import', csvgen, this.httpOptions).pipe(
-
-      catchError(this.handleError<any>('updateHero'))
-    );
+  import(csvgen: CsvGen):void {
+    var stringBody = JSON.stringify(csvgen)
+     this.http.post(this.csvgenUrl+'/import', stringBody, this.httpOptions).subscribe((data: any) => {
+      var that = this;
+    });
   }
 
   constructor(private http: HttpClient) { }

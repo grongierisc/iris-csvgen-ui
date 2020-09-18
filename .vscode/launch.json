@@ -1,6 +1,15 @@
 {
     "version": "0.2.0",
-    "configurations": [    
+    "configurations": [ 
+      {
+        "type": "firefox",
+        "request": "launch",
+        "reAttach": true,
+        "name": "Launch angular debug",
+        "url": "http://localhost:4200/index.html",
+        "port":6001,
+        "webRoot": "${workspaceFolder}/front"
+      },
       {
         "type": "objectscript",
         "request": "launch",
