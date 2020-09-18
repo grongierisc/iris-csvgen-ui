@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { HttpClient } from '@angular/common/http';
 import { ToastrService,GlobalConfig } from 'ngx-toastr';
+import { NgxSpinnerService } from "ngx-spinner"; 
 
 
 @Component({
@@ -18,6 +19,7 @@ export class FileUploadComponent implements OnInit {
     public fb: FormBuilder,
     private http: HttpClient,
     private toastr: ToastrService,
+    private SpinnerService: NgxSpinnerService,
 
   ) {
     this.form = this.fb.group({
@@ -48,8 +50,10 @@ export class FileUploadComponent implements OnInit {
     var stringBody = JSON.stringify(body)
     formData.append("body", stringBody);
     formData.append("file", this.form.get('file').value)
-
+    this.SpinnerService.show();  
     this.http.post('http://localhost:52773/api/csvgen/import', formData).subscribe((data: any) => {
+
+      this.SpinnerService.hide();
       var that = this;
       var send_output =  function(color : string, text : string, hidden : boolean) {
           that.open_toast("Success", "File successfully sent to Intersystems IRIS for Health.", "success")
