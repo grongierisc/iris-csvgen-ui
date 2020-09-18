@@ -1,0 +1,25 @@
+<div class="container">
+    <form [formGroup]="form" (ngSubmit)="submitForm()">
+        <div class="form-group">
+            <input type="file" (change)="uploadFile($event)">
+        </div>
+
+        <div class="form-group input-group-lg">
+            <label>
+                Separator : 
+            <input id="separator" name="separator" class="form-control" placeholder="Separator" formControlName="separator" required>
+            </label>
+        </div>
+        <div class="form-group input-group-lg">
+            <label>
+                Table Name : 
+            <input class="form-control" placeholder="Table Name" formControlName="tableName" required>
+            </label>
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-danger btn-block btn-lg">Create</button>
+        </div>
+    </form>
+    <p class="mr-auto" id="send_action">
+</div>

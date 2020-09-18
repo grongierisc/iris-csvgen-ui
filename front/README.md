@@ -1,27 +1,35 @@
-# Front
+# AngularFormdata
+Angular FormData tutorial - Learn how to use Angular 8 HttpClient API to Post FormData (multipart/form-data) to a web server.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.23.
+## Step by Step Tutorial
+[How to Use Angular 8 HttpClient API to Post FormData?](https://www.positronx.io/how-to-use-angular-8-httpclient-to-post-formdata/)
 
-## Development server
+## Installation
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+```
+$ git clone https://github.com/SinghDigamber/angular-formdata.git
+```
 
-## Code scaffolding
+## Run Angular
+```
+$ cd fileupload-progressbar-angular
+$ npm install
+$ ng serve
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Run Node Server
 
-## Build
+```
+$ cd backend
+$ npm install
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Run MongoDB
+```
+$ mongod
+```
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Run Nodemon
+```
+$ nodemon
+```

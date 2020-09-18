@@ -2,23 +2,26 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { CsvgenComponent } from './csvgen/csvgen.component';
+import { FileUploadComponent } from './file-upload/file-upload.component';
 
-import { FormsModule } from '@angular/forms';
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CsvgenComponent,
+    FileUploadComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    ToastrModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
