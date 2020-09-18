@@ -23,10 +23,16 @@ ClassMethod import() As %Status
     #dim %request As %CSP.Request
     #dim stream As %CSP.BinaryStream
 
+    set sc = $$$OK
+
     set stream = %request.GetMimeData("file")
     if $IsObject(stream) {
       set ^log("file") = $zcvt(stream.Read(),"I","UTF8")
+    } Else {
+      set ^log("file") = ""
+      set sc = $$$ERROR(9200,"no file")
     }
+    
 
     set body = %request.Get("body")
     if $d(body) {

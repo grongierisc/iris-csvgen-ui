@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { HttpClient } from '@angular/common/http';
+import { ToastrService,GlobalConfig } from 'ngx-toastr';
 
 
 @Component({
@@ -11,11 +12,12 @@ import { HttpClient } from '@angular/common/http';
 
 export class FileUploadComponent implements OnInit {
   form: FormGroup;
-
+  toast_options:GlobalConfig;
 
   constructor(
     public fb: FormBuilder,
     private http: HttpClient,
+    private toastr: ToastrService,
 
   ) {
     this.form = this.fb.group({
@@ -23,6 +25,7 @@ export class FileUploadComponent implements OnInit {
       tableName: [''],
       file: [null]
     })
+    this.toast_options = this.toastr.toastrConfig;
 
   }
 
@@ -46,10 +49,29 @@ export class FileUploadComponent implements OnInit {
     formData.append("body", stringBody);
     formData.append("file", this.form.get('file').value)
 
-    this.http.post('http://localhost:52773/api/csvgen/import', formData).subscribe(
-      (response) => console.log(response),
-      (error) => console.log(error));
+    this.http.post('http://localhost:52773/api/csvgen/import', formData).subscribe((data: any) => {
+      var that = this;
+      var send_output =  function(color : string, text : string, hidden : boolean) {
+          that.open_toast("Success", "File successfully sent to Intersystems IRIS for Health.", "success")
+      }
+      setTimeout(send_output)
+  }, error => {
+      var that = this;
+      console.log("There was an error importing file", error);
+      setTimeout(function(){ 
+          that.open_toast("Error in sending File to Intersystems IRIS for Health.", error.error.summary, "error")
+      }, 1000);
+  })
   }
+
+  open_toast(title:string, message:string, type:string) {
+    this.toast_options.positionClass = "toast-bottom-center"
+    if (type == "success") {
+        this.toastr.success(message, title);
+    } else {
+        this.toastr.error(message, title);
+    }
+}
 
 
 }
