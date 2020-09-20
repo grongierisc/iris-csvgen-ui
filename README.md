@@ -6,6 +6,8 @@
 - [ ] Finish server side
 - [ ] ZPM module
 - [ ] Update readme
+- [ ] Import from url
+- [ ] Advence parameter
 
 # Introduction 
 This is a csvgen UI frontend in Angular 8.
