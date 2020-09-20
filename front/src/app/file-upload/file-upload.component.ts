@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { HttpClient } from '@angular/common/http';
 import { ToastrService,GlobalConfig } from 'ngx-toastr';
 import { NgxSpinnerService } from "ngx-spinner"; 
+import { CsvgenService } from "../csvgen.service"
 
 
 @Component({
@@ -20,7 +21,8 @@ export class FileUploadComponent implements OnInit {
     public fb: FormBuilder,
     private http: HttpClient,
     private toastr: ToastrService,
-    private SpinnerService: NgxSpinnerService,
+    private spinnerService: NgxSpinnerService,
+    private csvgenService: CsvgenService,
 
   ) {
     this.form = this.fb.group({
@@ -69,10 +71,10 @@ export class FileUploadComponent implements OnInit {
     var stringBody = JSON.stringify(body)
     formData.append("body", stringBody);
     formData.append("file", this.form.get('file').value)
-    this.SpinnerService.show();  
-    this.http.post('http://localhost:52773/api/csvgen/import', formData).subscribe((data: any) => {
+    this.spinnerService.show();  
+    this.csvgenService.import(formData).subscribe((data: any) => {
 
-      this.SpinnerService.hide();
+      this.spinnerService.hide();
       var that = this;
 
       that.open_toast("Success", "File successfully sent to Intersystems IRIS for Health.", "success")
