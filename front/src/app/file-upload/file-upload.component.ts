@@ -1,23 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ToastrService,GlobalConfig } from 'ngx-toastr';
 import { NgxSpinnerService } from "ngx-spinner"; 
 import { CsvgenService } from "../csvgen.service"
 import { ViewChild } from '@angular/core';
 
-
 @Component({
   selector: 'app-file-upload',
   templateUrl: './file-upload.component.html',
-  styleUrls: ['./file-upload.component.css']
+  styleUrls: ['./file-upload.component.scss']
 })
 
 export class FileUploadComponent implements OnInit {
   form: FormGroup;
-  toast_options:GlobalConfig;
+  toast_options: GlobalConfig;
   submitted = false;
 
-  @ViewChild('inputFile',{static: false}) fileName;
+  @ViewChild('inputFile',{static: false}) fileName: ElementRef;
+  file: any;
 
   constructor(
     public fb: FormBuilder,
@@ -37,12 +37,20 @@ export class FileUploadComponent implements OnInit {
 
   ngOnInit() { }
 
-  uploadFile(event) {
-    const file = (event.target as HTMLInputElement).files[0];
+  onDrop(event){
+    this.uploadFile(event[0])
+  }
+
+  fromBrowser(event){
+    this.uploadFile(event.target.files[0])
+  }
+
+  uploadFile(file) {
     this.form.patchValue({
       file: file
     });
     this.form.get('file').updateValueAndValidity()
+    this.file = file
   }
 
   reset() {
@@ -51,12 +59,35 @@ export class FileUploadComponent implements OnInit {
     this.fileName.nativeElement.value = "";
   }
 
+  /**
+   * Delete file 
+  */
+  deleteFile() {
+    this.file = null;
+  }
+
+  /**
+   * format bytes
+   * @param bytes (File size in bytes)
+   * @param decimals (Decimals point)
+   */
+  formatBytes(bytes, decimals) {
+    if (bytes === 0) {
+      return '0 Bytes';
+    }
+    const k = 1024;
+    const dm = decimals <= 0 ? 0 : decimals || 2;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+  }
+
   submitForm() {
 
     this.submitted = true;
 
     if (this.form.invalid) {
-      if (this.form.get('file').value === null){
+      if (this.file == null){
         let that = this;
 
         that.open_toast("Error in sending File to Intersystems IRIS for Health.", "File is mandatory", "error")
