@@ -74,17 +74,19 @@ export class FileUploadComponent implements OnInit {
     formData.append("body", stringBody);
     formData.append("file", this.form.get('file').value)
     this.spinnerService.show();  
+    var that = this;
     this.csvgenService.import(formData).subscribe((data: any) => {
 
       this.spinnerService.hide();
-      var that = this;
+
 
       that.open_toast("Success", "File successfully sent to Intersystems IRIS for Health.", "success")
 
       this.reset()
 
   }, error => {
-      var that = this;
+
+      this.spinnerService.hide();
       console.log("There was an error importing file", error);
       that.open_toast("Error in sending File to Intersystems IRIS for Health.", error.error.summary, "error")
 
