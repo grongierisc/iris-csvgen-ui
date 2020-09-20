@@ -85,10 +85,16 @@ export class FileUploadComponent implements OnInit {
       this.reset()
 
   }, error => {
-
       this.spinnerService.hide();
       console.log("There was an error importing file", error);
-      that.open_toast("Error in sending File to Intersystems IRIS for Health.", error.error.summary, "error")
+      let msg = ''
+      if (error.error != null) {
+        msg = error.error.summary
+      }
+      else {
+        msg = error.message
+      }
+      that.open_toast("Error in sending File to Intersystems IRIS for Health.", msg, "error")
 
   })
   }
