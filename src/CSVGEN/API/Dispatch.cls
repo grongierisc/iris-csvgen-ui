@@ -23,29 +23,29 @@ ClassMethod import() As %Status
     #dim %request As %CSP.Request
     #dim stream As %CSP.BinaryStream
 
-    set sc = $$$OK
-
+  Try {
+    // Get stream
     set stream = %request.GetMimeData("file")
-    if $IsObject(stream) {
-      set ^log("file") = $zcvt(stream.Read(),"I","UTF8")
-    } Else {
-      set ^log("file") = ""
-      set sc = $$$ERROR(9200,"no file")
+    if '$IsObject(stream) {
+      $$$ThrowOnError($$$ERROR(9200,"no file"))
     }
-    
-
+    // Get properties
     set body = %request.Get("body")
-    if $d(body) {
-      set ^log("body") = body
+    set ^log("body") = body
+    if '$d(body) {
+      $$$ThrowOnError($$$ERROR(9200,"no parameters"))
     }
 
-    if $IsObject(%request.Content) {
-      set log = %request.Content.Read()
-      w log
-      set ^log = log
-    }
+    set dynaBody = {}.%FromJSON(body)
 
-    Quit $$$OK
+    $$$ThrowOnError(##class(community.csvgen).StreamToFile(stream,.filename))
+    $$$ThrowOnError(##class(community.csvgen).Generate(filename,dynaBody.separator,dynaBody.tableName))
+
+  } Catch ex {
+      Return ex.AsStatus()
+  }
+
+  Quit $$$OK
 }
 
 }
