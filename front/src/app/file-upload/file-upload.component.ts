@@ -80,7 +80,7 @@ export class FileUploadComponent implements OnInit {
       this.spinnerService.hide();
 
 
-      that.open_toast("Success", "File successfully sent to Intersystems IRIS for Health.", "success")
+      that.open_toast("Success", data, "success")
 
       this.reset()
 
@@ -106,8 +106,10 @@ export class FileUploadComponent implements OnInit {
   open_toast(title:string, message:string, type:string) {
     this.toast_options.positionClass = "toast-bottom-center"
     if (type == "success") {
+        this.toast_options.disableTimeOut = true
         this.toastr.success(message, title);
     } else {
+      this.toast_options.disableTimeOut = false
         this.toastr.error(message, title);
     }
 }
