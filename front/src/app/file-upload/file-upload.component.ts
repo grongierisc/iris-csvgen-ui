@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { HttpClient } from '@angular/common/http';
 import { ToastrService,GlobalConfig } from 'ngx-toastr';
 import { NgxSpinnerService } from "ngx-spinner"; 
 import { CsvgenService } from "../csvgen.service"
+import { ViewChild } from '@angular/core';
 
 
 @Component({
@@ -17,9 +17,10 @@ export class FileUploadComponent implements OnInit {
   toast_options:GlobalConfig;
   submitted = false;
 
+  @ViewChild('inputFile',{static: false}) fileName;
+
   constructor(
     public fb: FormBuilder,
-    private http: HttpClient,
     private toastr: ToastrService,
     private spinnerService: NgxSpinnerService,
     private csvgenService: CsvgenService,
@@ -47,6 +48,7 @@ export class FileUploadComponent implements OnInit {
   reset() {
     this.submitted = false;
     this.form.reset();
+    this.fileName.nativeElement.value = "";
   }
 
   submitForm() {
