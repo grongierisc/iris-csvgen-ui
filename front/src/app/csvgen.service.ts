@@ -18,7 +18,7 @@ export class CsvgenService {
     // trim index.html
     var re = new RegExp(/^.*\//);
     url = re.exec(url).toString();
-    //url = 'http://localhost:52773/api/csvgen/'
+    //url = 'http://localhost:52773/api/IRISAPP/csvgen/'
     var result = this.http.post(url+'import', formData,{ headers, responseType: 'text'})
     return result
   }

@@ -1,25 +1,45 @@
 <h1>Csvgen UI</h1>
 <p></p>
 <div>
-    <form [formGroup]="form" (ngSubmit)="submitForm()">
-        <div *ngIf="file == null" class="form-group dropzone" appDnd (fileDropped)="onDrop($event)">
-            <input class="inputFile" #inputFile type="file" id="file" (change)="fromBrowser($event)">
-            <img src="assets/img/upload.svg" alt="">
-            <h3>Drag and drop file here</h3>
-            <h3>or</h3>
-            <label class="inputFileLabel" for="inputFile">Browse for file</label>
+    <div class="row">
+        <div class="block">Local</div>
+        <div class="block">
+            <ui-switch color="red" [(ngModel)]="enableUrl"></ui-switch>
         </div>
-        <div *ngIf="file != null" class="single-file">
-            <img src="assets/img/file.svg" width="45px" alt="file">
-            <div class="info">
-                <h4 class="name">
-                    {{ file?.name }}
-                </h4>
-                <p class="size">
-                    {{ formatBytes(file?.size) }}
-                </p>
+        <div class="block"> Url </div>
+    </div>
+    <form [formGroup]="form" (ngSubmit)="submitForm()">
+        <div *ngIf="enableUrl == false">
+            <div *ngIf="file == null" class="form-group dropzone" appDnd (fileDropped)="onDrop($event)">
+                <input class="inputFile" #inputFile type="file" id="file" (change)="fromBrowser($event)">
+                <img src="assets/img/upload.svg" alt="">
+                <h3>Drag and drop file here</h3>
+                <h3>or</h3>
+                <label class="inputFileLabel" for="inputFile">Browse for file</label>
             </div>
-            <img src="assets/img/delete.svg" class="delete" width="20px" alt="x" (click)="deleteFile()">
+            <div *ngIf="file != null" class="single-file">
+                <img src="assets/img/file.svg" width="45px" alt="file">
+                <div class="info">
+                    <h4 class="name">
+                        {{ file?.name }}
+                    </h4>
+                    <p class="size">
+                        {{ formatBytes(file?.size) }}
+                    </p>
+                </div>
+                <img src="assets/img/delete.svg" class="delete" width="20px" alt="x" (click)="deleteFile()">
+            </div>
+            <div *ngIf="file != null" class="single-file">
+                <textarea #filePreview rows=5 wrap="off" class="form-control" formControlName="filePreview"
+                    id="filePreview">{{filePreview}}</textarea>
+            </div>
+        </div>
+        <div *ngIf="enableUrl">
+            <input id="url" name="url" class="form-control" placeholder="http://exemple.com/my.csv"
+                formControlName="url" [ngClass]="{ 'is-invalid': submitted && f.url.errors }">
+            <div *ngIf="submitted && f.url.errors" class="invalid-feedback">
+                <div *ngIf="f.url.errors.pattern">This is not an valide url</div>
+            </div>
         </div>
         <p></p>
         <div class="form-group input-group-lg">

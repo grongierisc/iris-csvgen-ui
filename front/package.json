@@ -25,6 +25,7 @@
     "ng-bootstrap": "^1.6.3",
     "ngx-spinner": "^8.1.0",
     "ngx-toastr": "^10.0.4",
+    "ngx-toggle-switch": "^2.0.5",
     "rxjs": "~6.4.0",
     "tslib": "^1.13.0",
     "zone.js": "~0.9.1"

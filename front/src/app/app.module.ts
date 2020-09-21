@@ -13,6 +13,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { DndDirective } from './file-upload/direcitves/dnd.directive'; 
 
+import { UiSwitchModule } from 'ngx-toggle-switch';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +27,8 @@ import { DndDirective } from './file-upload/direcitves/dnd.directive';
     ReactiveFormsModule,
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    UiSwitchModule
   ],
   providers: [],
   bootstrap: [AppComponent]

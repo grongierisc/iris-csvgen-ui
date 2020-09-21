@@ -91,7 +91,6 @@
   justify-content: space-between;
   align-items: center;
   border: dashed 1px #979797;
-  margin-bottom: 1rem;
 
   .delete {
     display: flex;
@@ -123,3 +122,16 @@
     width: 100%
   }
 }
+
+#filePreview {
+	font-family: 'Courier New', Courier, monospace;
+	margin-top: 10px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-evenly;
+  white-space: pre-wrap;
+  margin-bottom: 0.25rem;
+}
+
