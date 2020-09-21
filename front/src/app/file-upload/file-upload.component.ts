@@ -15,6 +15,7 @@ export class FileUploadComponent implements OnInit {
   form: FormGroup;
   toast_options: GlobalConfig;
   submitted = false;
+  pattern = "^[a-zA-Z0-9]+[\.][a-zA-Z0-9.]+[a-zA-Z0-9]$"
 
   @ViewChild('inputFile',{static: false}) fileName: ElementRef;
   file: any;
@@ -28,7 +29,7 @@ export class FileUploadComponent implements OnInit {
   ) {
     this.form = this.fb.group({
       separator: ['',[Validators.required, Validators.maxLength(1)]],
-      tableName: ['',Validators.required],
+      className: ['',[Validators.required,Validators.pattern(this.pattern)]],
       file: [null,Validators.required]
     })
     this.toast_options = this.toastr.toastrConfig;
@@ -99,7 +100,7 @@ export class FileUploadComponent implements OnInit {
     var formData: any = new FormData();
     let body = {
       "separator": this.form.get('separator').value,
-      "tableName": this.form.get('tableName').value
+      "className": this.form.get('className').value
     }
     var stringBody = JSON.stringify(body)
     formData.append("body", stringBody);

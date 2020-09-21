@@ -1,47 +1,51 @@
 <h1>Csvgen UI</h1>
 <p></p>
 <div>
-<form [formGroup]="form" (ngSubmit)="submitForm()">
-    <div *ngIf="file == null" class="form-group dropzone" appDnd (fileDropped)="onDrop($event)">
-        <input class="inputFile" #inputFile type="file" id="file" (change)="fromBrowser($event)">
-        <img src="assets/img/upload.svg" alt="">
-        <h3>Drag and drop file here</h3>
-        <h3>or</h3>
-        <label class="inputFileLabel" for="inputFile">Browse for file</label>
-    </div>
-    <div *ngIf="file != null" class="single-file" >
-        <img src="assets/img/file.svg" width="45px" alt="file">
-        <div class="info">
-          <h4 class="name">
-            {{ file?.name }}
-          </h4>
-          <p class="size">
-            {{ formatBytes(file?.size) }}
-          </p></div>
-          <img src="assets/img/delete.svg" class="delete" width="20px" alt="x" (click)="deleteFile()">
-    </div>
-    <p></p>
-    <div class="form-group input-group-lg">
-        <label>Separator :</label>
-            
-            <input id="separator" name="separator" class="form-control" placeholder=";"
-                formControlName="separator" [ngClass]="{ 'is-invalid': submitted && f.separator.errors }">
-                <div *ngIf="submitted && f.separator.errors" class="invalid-feedback">
-                    <div *ngIf="f.separator.errors.maxlength">Separator must 1 character</div>
-                </div>
+    <form [formGroup]="form" (ngSubmit)="submitForm()">
+        <div *ngIf="file == null" class="form-group dropzone" appDnd (fileDropped)="onDrop($event)">
+            <input class="inputFile" #inputFile type="file" id="file" (change)="fromBrowser($event)">
+            <img src="assets/img/upload.svg" alt="">
+            <h3>Drag and drop file here</h3>
+            <h3>or</h3>
+            <label class="inputFileLabel" for="inputFile">Browse for file</label>
+        </div>
+        <div *ngIf="file != null" class="single-file">
+            <img src="assets/img/file.svg" width="45px" alt="file">
+            <div class="info">
+                <h4 class="name">
+                    {{ file?.name }}
+                </h4>
+                <p class="size">
+                    {{ formatBytes(file?.size) }}
+                </p>
+            </div>
+            <img src="assets/img/delete.svg" class="delete" width="20px" alt="x" (click)="deleteFile()">
+        </div>
+        <p></p>
+        <div class="form-group input-group-lg">
+            <label>Separator :</label>
 
-    </div>
-    <div class="form-group input-group-lg">
-        <label>Table Name :</label>
-            
-            <input class="form-control" placeholder="Table.Name" formControlName="tableName" [ngClass]="{ 'is-invalid': submitted && f.tableName.errors }">
-        
-    </div>
+            <input id="separator" name="separator" class="form-control" placeholder=";" formControlName="separator"
+                [ngClass]="{ 'is-invalid': submitted && f.separator.errors }">
+            <div *ngIf="submitted && f.separator.errors" class="invalid-feedback">
+                <div *ngIf="f.separator.errors.maxlength">Separator must 1 character</div>
+            </div>
 
-    <div class="form-group">
-        <button class="btn btn-danger btn-block btn-lg">Create</button>
-    </div>
-</form>
+        </div>
+        <div class="form-group input-group-lg">
+            <label>Class Name :</label>
+
+            <input class="form-control" placeholder="Class.Name" formControlName="className"
+                [ngClass]="{ 'is-invalid': submitted && f.className.errors }">
+            <div *ngIf="submitted && f.className.errors" class="invalid-feedback">
+                <div *ngIf="f.className.errors.pattern">Must have at least a ".", eg : Class.Name</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-danger btn-block btn-lg">Create</button>
+        </div>
+    </form>
 </div>
 <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">
     <p style="color: white">Please Wait. </p>
