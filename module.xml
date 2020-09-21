@@ -16,7 +16,7 @@
       <CSPApplication CookiePath="/csp/${namespace}/csvgen" DefaultTimeout="900" DeployPath="${cspdir}/csvgen" MatchRoles=":${dbrole}" PasswordAuthEnabled="0" Recurse="1" ServeFiles="1" ServeFilesTimeout="3600" SourcePath="/front/dist/csvgen-ui" UnauthenticatedEnabled="1" Url="/csp/${namespace}/csvgen" UseSessionCookie="2"/>
       <SourcesRoot>src</SourcesRoot>
       <Resource Directory="cls" Name="CSVGEN.PKG"/>
-      <CSPApplication CookiePath="/api/${namespace}/csvgen/" DefaultTimeout="900" DispatchClass="CSVGEN.API.Dispatch" MatchRoles=":${dbrole}" PasswordAuthEnabled="0" Recurse="1" ServeFiles="1" ServeFilesTimeout="3600" UnauthenticatedEnabled="1" Url="/api/${namespace}/csvgen" UseSessionCookie="2"/>
+      <CSPApplication CookiePath="/api/${namespace}/csvgen/" DefaultTimeout="900" DispatchClass="CSVGEN.API.Dispatch" MatchRoles=":%All" PasswordAuthEnabled="0" Recurse="1" ServeFiles="1" ServeFilesTimeout="3600" UnauthenticatedEnabled="1" Url="/api/${namespace}/csvgen" UseSessionCookie="2"/>
       <!--UnitTest Name="/tests" Package="UnitTest" Phase="test"/-->
     </Module>
   </Document>
