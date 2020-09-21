@@ -56,7 +56,7 @@ export class FileUploadComponent implements OnInit {
   reset() {
     this.submitted = false;
     this.form.reset();
-    this.fileName.nativeElement.value = "";
+    this.file = null;
   }
 
   /**
@@ -120,7 +120,7 @@ export class FileUploadComponent implements OnInit {
       console.log("There was an error importing file", error);
       let msg = ''
       if (error.error != null) {
-        msg = error.error.summary
+        msg = error.error
       }
       else {
         msg = error.message
