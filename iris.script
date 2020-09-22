@@ -4,7 +4,9 @@ set sc = ##class(App.Installer).setup()
 
 zn "IRISAPP"
 
-zpm "install csvgen"
+zpm
+load "/irisdev/app"
+q
 
 zn "%SYS"
 Do ##class(Security.Users).UnExpireUserPasswords("*")

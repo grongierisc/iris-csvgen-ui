@@ -1,12 +1,12 @@
 # TODO 
 
-- [ ] Add drag and drop
+- [x] Add drag and drop
 - [ ] Add Oauth
 - [ ] Add navbar
-- [ ] Finish server side
-- [ ] ZPM module
-- [ ] Update readme
-- [ ] Import from url
+- [x] Finish server side
+- [x] ZPM module
+- [x] Update readme
+- [x] Import from url
 - [ ] Advence parameter
 
 # Introduction 
@@ -20,10 +20,25 @@ Run the server
 docker-compose up -d
 ```
 
+# Install with ZPM
+
+It will automatically install the depencey : csvgen and sslclient
+
+```objectscript
+zpm "install csvgen-ui"
+```
+
 # UI
+
+The UI is per-namespcae, this mean it will be aviable only for the namespace where csvgen-ui is install.
 ```
-http://localhost:52773/csp/healthshare/{tenant}/{endpoint}/ui/index.html
+http://localhost:52773/csp/{namespace}/csvgen/index.html
 ```
+
+## Demo
+
+![Demo](/misc/UploadDemo.gif)
+
 
 # Misc
 Visual Studio Directory Structure
@@ -42,12 +57,5 @@ Visual Studio Directory Structure
     └── CSVGEN
         └── API
 ```
-
- ## Test this module
- 
- Natively from depot :
- 
- ```objectscript
- do ##class(%UnitTest.Manager).DebugRunTestCase("","Test.Grongier.JSON.Utils",,)
- ```
+Where front is the angular UI dans src is le backend source code for IRIS.
 
