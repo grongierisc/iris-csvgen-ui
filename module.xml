@@ -10,7 +10,6 @@
       <Dependencies>
         <ModuleReference>
           <Name>csvgen</Name>
-          <Version>1.1.6</Version>
         </ModuleReference>
       </Dependencies>
       <CSPApplication CookiePath="/csp/${namespace}/csvgen" DefaultTimeout="900" DeployPath="${cspdir}/csvgen" MatchRoles=":${dbrole}" PasswordAuthEnabled="0" Recurse="1" ServeFiles="1" ServeFilesTimeout="3600" SourcePath="/front/dist/csvgen-ui" UnauthenticatedEnabled="1" Url="/csp/${namespace}/csvgen" UseSessionCookie="2"/>
