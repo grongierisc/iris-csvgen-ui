@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,9 @@ export class CsvgenService {
     // trim index.html
     var re = new RegExp(/^.*\//);
     url = re.exec(url).toString();
-    //url = 'http://localhost:52773/api/IRISAPP/csvgen/'
+    if (!environment.production) {
+      url = 'http://localhost:52774/api/IRISAPP/csvgen/'
+    }
     var result = this.http.post(url+'import', formData,{ headers, responseType: 'text'})
     return result
   }
