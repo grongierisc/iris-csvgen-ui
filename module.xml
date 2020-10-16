@@ -3,7 +3,8 @@
   <Document name="csvgen-ui.ZPM">
     <Module>
       <Name>csvgen-ui</Name>
-      <Version>1.0.1</Version>
+      <Version>1.0.2</Version>
+      <Description>An angular frontend for Csvgen app.</Description>
       <Description>csvgen-ui for IRIS</Description>
       <Keywords>REST,Full-stack,angular</Keywords>
       <Packaging>module</Packaging>
