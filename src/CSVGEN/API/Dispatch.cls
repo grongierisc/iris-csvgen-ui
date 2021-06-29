@@ -57,4 +57,14 @@ ClassMethod import() As %Status
   Quit $$$OK
 }
 
+ClassMethod Info() As %Status
+{
+  Set sc = $$$OK
+  
+  w !,"Csvgen-ui will be avialable on /csp/"_$namespace_"/csvgen/index.html"
+  w !,"Most likely something like http://localhost:52773/csp/"_$namespace_"/csvgen/index.html"
+
+  Return sc
+}
+
 }

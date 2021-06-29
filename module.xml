@@ -3,7 +3,7 @@
   <Document name="csvgen-ui.ZPM">
     <Module>
       <Name>csvgen-ui</Name>
-      <Version>1.0.1</Version>
+      <Version>1.0.2</Version>
       <Description>csvgen-ui for IRIS</Description>
       <Keywords>REST,Full-stack,angular</Keywords>
       <Packaging>module</Packaging>
@@ -18,6 +18,9 @@
       <Resource Directory="cls" Name="CSVGEN.PKG"/>
       <CSPApplication CookiePath="/api/${namespace}/csvgen/" DefaultTimeout="900" DispatchClass="CSVGEN.API.Dispatch" MatchRoles=":%All" PasswordAuthEnabled="0" Recurse="1" ServeFiles="1" ServeFilesTimeout="3600" UnauthenticatedEnabled="1" Url="/api/${namespace}/csvgen" UseSessionCookie="2"/>
       <!--UnitTest Name="/tests" Package="UnitTest" Phase="test"/-->
+      <Invokes>
+        <Invoke Class="CSVGEN.API.Dispatch" Method="Info"></Invoke>
+      </Invokes>
     </Module>
   </Document>
 </Export>
