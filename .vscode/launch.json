@@ -7,8 +7,16 @@
         "reAttach": true,
         "name": "Launch angular debug",
         "url": "http://localhost:4200/index.html",
-        "port":6001,
-        "webRoot": "${workspaceFolder}/front"
+        "pathMappings": [
+          {
+              "url": "webpack:///src",
+              "path": "${workspaceFolder}/front/src"
+          },
+          {
+              "url": "http://localhost:4200",
+              "path": "${workspaceFolder}/front/src"
+          }
+      ]
       },
       {
         "type": "objectscript",

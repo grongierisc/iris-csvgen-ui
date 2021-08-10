@@ -1,15 +1,15 @@
-; run installer to create namespace
-do $SYSTEM.OBJ.Load("/opt/irisapp/Installer.cls", "ck")
-set sc = ##class(App.Installer).setup() 
+    ; run installer to create namespace
+    do $SYSTEM.OBJ.Load("/opt/irisapp/Installer.cls", "ck")
+    set sc = ##class(App.Installer).setup() 
 
-zn "IRISAPP"
+    zn "IRISAPP"
 
-zpm
-install "csvgen-ui"
-q
+    zpm
+    install "csvgen-ui"
+    q
 
-zn "%SYS"
-Do ##class(Security.Users).UnExpireUserPasswords("*")
+    zn "%SYS"
+    Do ##class(Security.Users).UnExpireUserPasswords("*")
 
-; call your initial methods here
-halt
+    ; call your initial methods here
+    halt
