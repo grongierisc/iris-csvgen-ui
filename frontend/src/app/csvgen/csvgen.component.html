@@ -1,0 +1,11 @@
+<h1>Csvgen UI</h1>
+<div>
+
+<form [formGroup]="myForm" (ngSubmit)="onSubmitted()">
+    <app-uploader [myForm]="myForm"></app-uploader>
+    <app-informations [myForm]="myForm"></app-informations>
+    <app-fields [myForm]="myForm"></app-fields>
+    <button type="submit">Submit</button>
+</form>
+
+</div>

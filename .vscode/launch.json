@@ -10,11 +10,11 @@
         "pathMappings": [
           {
               "url": "webpack:///src",
-              "path": "${workspaceFolder}/front/src"
+              "path": "${workspaceFolder}/frontend/src"
           },
           {
               "url": "http://localhost:4200",
-              "path": "${workspaceFolder}/front/src"
+              "path": "${workspaceFolder}/frontend/src"
           }
       ]
       },
