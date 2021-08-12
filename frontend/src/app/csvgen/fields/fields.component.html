@@ -1,0 +1,38 @@
+<mat-expansion-panel  hideToggle  (opened)="panelOpenState = true"
+                                  (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+        <mat-panel-title class="panel-center">
+            Columns :
+        </mat-panel-title>
+        <mat-panel-description>
+            <button mat-button >Guess it !</button>
+        </mat-panel-description>
+    </mat-expansion-panel-header>
+    <form autocomplete="off" [formGroup]="form">
+      <ng-container formArrayName="fields">
+        <ng-container *ngFor="let fieldForm of fields.controls; let i = index">
+            <div [formGroupName]="i">
+                <mat-form-field appearance="fill">
+                    <input matInput color="primary"
+                           formControlName="column"
+                           placeholder="Column name">
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-select formControlName="type"
+                            placeholder="Type">
+                        <mat-option value="beginner">Beginner</mat-option>
+                        <mat-option value="intermediate">Intermediate</mat-option>
+                        <mat-option value="advanced">Advanced</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-icon (click)="deleteField(i)">
+                    delete_forever</mat-icon>
+            </div>
+        </ng-container>
+    </ng-container>
+    <button mat-mini-fab color="primary" (click)="addField()">
+      <mat-icon class="add-course-btn">add</mat-icon>
+    </button>
+    </form>
+</mat-expansion-panel>
+

@@ -2,9 +2,9 @@
 <div>
 
 <form [formGroup]="myForm" (ngSubmit)="onSubmitted()">
-    <app-uploader [myForm]="myForm"></app-uploader>
-    <app-informations [myForm]="myForm"></app-informations>
-    <app-fields [myForm]="myForm"></app-fields>
+    <app-uploader formGroupName="uploader"></app-uploader>
+    <app-informations formGroupName="informations"></app-informations>
+    <app-fields formGroupName="fields"></app-fields>
     <button type="submit">Submit</button>
 </form>
 

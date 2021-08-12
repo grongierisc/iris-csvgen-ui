@@ -1,5 +1,5 @@
 import { Component, OnInit, Input} from '@angular/core';
-import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-informations',
@@ -12,15 +12,13 @@ export class InformationsComponent implements OnInit {
   separator: FormControl = new FormControl('',[Validators.required, Validators.maxLength(1)]);
   className: FormControl = new FormControl('',[Validators.required, Validators.pattern(this.pattern)]);
 
-  @Input() myForm!: FormGroup;
+  @Input() formGroupName!: string;
+  form!: FormGroup;
 
-  constructor(
-  ) {
-  }
+  constructor(private rootFormGroup: FormGroupDirective) {  }
 
   ngOnInit() {
-    this.myForm.addControl("separator",this.separator);
-    this.myForm.addControl("className" ,this.className);
+    this.form = this.rootFormGroup.control.get(this.formGroupName) as FormGroup;
   }
 
 }

@@ -1,3 +1,4 @@
+<form autocomplete="off" [formGroup]="form">
 <div *ngIf="file == null" class="form-group dropzone" appDnd (fileDropped)="onDrop($event)">
     <input class="inputFile" #inputFile type="file" id="file" (change)="fromBrowser($event)">
     <img src="assets/img/upload.svg" alt="">
@@ -18,6 +19,7 @@
     <img src="assets/img/delete.svg" class="delete" width="20px" alt="x" (click)="deleteFile()">
 </div>
 <div *ngIf="file != null" class="single-file">
-    <textarea style="width: -moz-available;width: -webkit-fill-available;" #filePreview rows=5 formControlName="filePreview"
+    <textarea style="width: -moz-available;width: -webkit-fill-available;" #filePreview rows=5 
         id="filePreview">{{filePreview}}</textarea>
 </div>
+</form>

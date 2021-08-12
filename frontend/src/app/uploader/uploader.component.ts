@@ -1,5 +1,5 @@
 import { Component, OnInit, Input} from '@angular/core';
-import { FormControl, FormGroup,FormBuilder } from '@angular/forms';
+import { FormControl, FormGroup,FormGroupDirective } from '@angular/forms';
 
 @Component({
   selector: 'app-uploader',
@@ -8,15 +8,15 @@ import { FormControl, FormGroup,FormBuilder } from '@angular/forms';
 })
 export class UploaderComponent implements OnInit {
 
-  submitted = false;
   file: any;
 
-  @Input() myForm!: FormGroup;
-  constructor(
-    private formBuilder: FormBuilder
-  ) { }
+  @Input() formGroupName!: string;
+  form!: FormGroup;
+
+  constructor(private rootFormGroup: FormGroupDirective) {  }
 
   ngOnInit(): void {
+    this.form = this.rootFormGroup.control.get(this.formGroupName) as FormGroup;
   }
 
   onDrop(event: any){
@@ -27,14 +27,13 @@ export class UploaderComponent implements OnInit {
     this.uploadFile(event.target.files[0])
   }
 
-  uploadFile(file: File) {
-    this.myForm.patchValue({
+  uploadFile(file: any) {
+    this.form.patchValue({
       file: file
     });
-    this.myForm.get('file')?.updateValueAndValidity()
     this.file = file
     var reader = new FileReader();
-    var SLICE = 1024 * 1;
+    var SLICE = 1024 * 2;
     var blob = file.slice(0, file.size < SLICE ? file.size : SLICE );
     reader.onload = (e) => {
       var input: HTMLInputElement = <HTMLInputElement>document.getElementById('filePreview')
@@ -43,17 +42,12 @@ export class UploaderComponent implements OnInit {
     reader.readAsText(blob);
   }
 
-  reset() {
-    this.submitted = false;
-    this.myForm.reset();
-    this.file = null;
-  }
-
   /**
    * Delete file 
   */
   deleteFile() {
     this.file = null;
+    this.form.reset()
   }
 
   /**

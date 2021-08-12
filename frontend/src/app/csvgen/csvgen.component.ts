@@ -9,15 +9,31 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 })
 export class CsvgenComponent implements OnInit {
 
-  myForm: FormGroup;
+  myForm!: FormGroup;
 
   constructor(private fb: FormBuilder) {
-    this.myForm = this.fb.group({})
+    this.myForm = this.fb.group({
+      informations : this.fb.group({ 
+        separator : '',
+        className : ''
+      }),
+      uploader : this.fb.group({
+        file : File
+      }),
+      fields : this.fb.array([
+      ]),
+    })
   }
 
   ngOnInit() { }
 
-  onSubmitted() {}
+  onSubmitted() {
+    console.log('Form:' + JSON.stringify(this.myForm.value));
+  }
+
+  resetForm() { 
+    this.myForm.reset();
+}
 
 }
 
