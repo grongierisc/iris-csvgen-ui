@@ -1,5 +1,6 @@
 import { Component, OnInit, Input} from '@angular/core';
 import { FormBuilder, FormGroup,FormGroupDirective,FormArray,Validators } from '@angular/forms';
+import { CsvgenService } from "../../service/csvgen.service"
 
 @Component({
   selector: 'app-fields',
@@ -14,7 +15,7 @@ export class FieldsComponent implements OnInit {
   form!: FormGroup;
   panelOpenState = false;
 
-  constructor(private rootFormGroup: FormGroupDirective,private fb: FormBuilder) {}
+  constructor(private rootFormGroup: FormGroupDirective,private fb: FormBuilder,private csvgenService: CsvgenService) {}
   
   ngOnInit(): void {
     this.form = this.rootFormGroup.control;
@@ -24,10 +25,10 @@ export class FieldsComponent implements OnInit {
     return this.form.controls["fields"] as FormArray;
   }
 
-  addField() {
+  addField(column: string, type: string) {
     const fieldForm = this.fb.group({
-      column: ['', Validators.required],
-      type: ['', Validators.required]
+      column: [column, Validators.required],
+      type: [type, Validators.required]
     });
     this.fields.push(fieldForm);
   }
@@ -37,11 +38,26 @@ export class FieldsComponent implements OnInit {
   }
 
   guessIt() {
-    if (this.form.invalid) {
-      console.log('Form: erros in form');
-      this.form.markAllAsTouched();
+
       console.log('Form:' + JSON.stringify(this.form.value));
+
+      let body = JSON.stringify(this.form.value);
+      let file = this.form.get("uploader.file")?.value;
+
+      let payload: FormData = new FormData();
+      payload.append("body",body);
+      payload.append("file",file);
+      
+      this.csvgenService.guessit(payload).subscribe((data: any[]) => {
+        this.fields.clear();
+        data.forEach(element => {
+          this.addField(element.column,element.type);
+        });
+        console.log('Form:' + JSON.stringify(this.form.value));
+      },(error: any) => {
+        console.log(error);
+      });
     }
-  }
+  
 
 }

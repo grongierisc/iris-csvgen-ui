@@ -5,7 +5,7 @@
             Columns :
         </mat-panel-title>
         <mat-panel-description>
-            <button mat-button (click)="guessIt()">Guess it !</button>
+            <button type='button' mat-button (click)="guessIt()">Guess it !</button>
         </mat-panel-description>
     </mat-expansion-panel-header>
     <form autocomplete="off" [formGroup]="form">
@@ -20,9 +20,12 @@
                 <mat-form-field appearance="fill">
                     <mat-select formControlName="type"
                             placeholder="Type">
-                        <mat-option value="beginner">Beginner</mat-option>
-                        <mat-option value="intermediate">Intermediate</mat-option>
-                        <mat-option value="advanced">Advanced</mat-option>
+                        <mat-option value="VARCHAR">VARCHAR</mat-option>
+                        <mat-option value="VARCHAR(250)">VARCHAR(250)</mat-option>
+                        <mat-option value="INTEGER">INTEGER</mat-option>
+                        <mat-option value="DOUBLE">DOUBLE</mat-option>
+                        <mat-option value="DATE">DATE</mat-option>
+                        <mat-option value="MONEY">MONEY</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-icon (click)="deleteField(i)">
@@ -30,7 +33,7 @@
             </div>
         </ng-container>
     </ng-container>
-    <button mat-mini-fab color="primary" (click)="addField()">
+    <button mat-mini-fab color="primary" (click)="addField('','')">
       <mat-icon class="add-course-btn">add</mat-icon>
     </button>
     </form>

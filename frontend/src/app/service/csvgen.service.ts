@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
 })
 export class CsvgenService {
 
-  constructor(    private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   import(formData: any): any {
 
@@ -20,9 +20,39 @@ export class CsvgenService {
     var re = new RegExp(/^.*\//);
     url = re.exec(url)?.toString()!;
     if (!environment.production) {
-      url = 'http://localhost:52773/api/IRISAPP/csvgen/'
+      url = 'http://localhost:52774/api/IRISAPP/csvgen/'
     }
     var result = this.http.post(url+'import', formData,{ headers, responseType: 'text'})
+    return result
+  }
+
+  importng(formData: any): any {
+
+    let url = location.toString()
+    // point to API
+    url = url.replace('csp','api')
+    // trim index.html
+    var re = new RegExp(/^.*\//);
+    url = re.exec(url)?.toString()!;
+    if (!environment.production) {
+      url = 'http://localhost:52774/api/IRISAPP/csvgen/'
+    }
+    var result = this.http.post(url+'importng', formData)
+    return result
+  }
+
+  guessit(formData: any): any {
+
+    let url = location.toString()
+    // point to API
+    url = url.replace('csp','api')
+    // trim index.html
+    var re = new RegExp(/^.*\//);
+    url = re.exec(url)?.toString()!;
+    if (!environment.production) {
+      url = 'http://localhost:52774/api/IRISAPP/csvgen/'
+    }
+    var result = this.http.post(url+'guessit', formData)
     return result
   }
 }
