@@ -1,14 +1,14 @@
 <form autocomplete="off" [formGroup]="form">
     <mat-form-field appearance="fill">
         <mat-label>Separator :</mat-label>
-        <input type="text" matInput formControlName="separator" placeholder="Ex. ; or ," maxlength="1">
+        <input type="text" matInput [formControl]="separator" placeholder="Ex. ; or ," maxlength="1">
         <mat-error *ngIf="separator.hasError">
             Separator must 1 character
         </mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill">
         <mat-label>Class Name :</mat-label>
-        <input type="text" matInput formControlName="className" placeholder="Ex. Class.Name">
+        <input type="text" matInput [formControl]="className"  placeholder="Ex. Class.Name">
         <mat-error *ngIf="className.hasError('required')">
             Class Name is <strong>required</strong>
         </mat-error>

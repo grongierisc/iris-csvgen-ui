@@ -5,7 +5,7 @@
             Columns :
         </mat-panel-title>
         <mat-panel-description>
-            <button mat-button >Guess it !</button>
+            <button mat-button (click)="guessIt()">Guess it !</button>
         </mat-panel-description>
     </mat-expansion-panel-header>
     <form autocomplete="off" [formGroup]="form">

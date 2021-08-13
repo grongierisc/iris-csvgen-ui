@@ -1,5 +1,5 @@
 <form autocomplete="off" [formGroup]="form">
-<div *ngIf="file == null" class="form-group dropzone" appDnd (fileDropped)="onDrop($event)">
+<div *ngIf="file == null" [ngClass]="(!form.get('file')?.touched && form.get('file')?.hasError )? 'dropzone': 'dropzone-error'" appDnd (fileDropped)="onDrop($event)">
     <input class="inputFile" #inputFile type="file" id="file" (change)="fromBrowser($event)">
     <img src="assets/img/upload.svg" alt="">
     <h3>Drag and drop file here</h3>

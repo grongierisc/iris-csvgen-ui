@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder,Validators } from '@angular/forms';
 
 
 @Component({
@@ -10,15 +10,16 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 export class CsvgenComponent implements OnInit {
 
   myForm!: FormGroup;
+  pattern = "^[a-zA-Z0-9]+[\.][a-zA-Z0-9.]+[a-zA-Z0-9]$";
 
   constructor(private fb: FormBuilder) {
     this.myForm = this.fb.group({
       informations : this.fb.group({ 
-        separator : '',
-        className : ''
+        separator : ['',[Validators.required]],
+        className : ['',[Validators.required, Validators.pattern(this.pattern)]]
       }),
       uploader : this.fb.group({
-        file : File
+        file : [File,[Validators.required]]
       }),
       fields : this.fb.array([
       ]),
@@ -28,7 +29,13 @@ export class CsvgenComponent implements OnInit {
   ngOnInit() { }
 
   onSubmitted() {
-    console.log('Form:' + JSON.stringify(this.myForm.value));
+    if (this.myForm.invalid) {
+      console.log('Form: erros in form');
+      this.myForm.markAllAsTouched();
+    } else {
+      console.log('Form:' + JSON.stringify(this.myForm.value));
+    }
+    
   }
 
   resetForm() { 

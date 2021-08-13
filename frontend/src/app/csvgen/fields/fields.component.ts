@@ -15,8 +15,6 @@ export class FieldsComponent implements OnInit {
   panelOpenState = false;
 
   constructor(private rootFormGroup: FormGroupDirective,private fb: FormBuilder) {}
-
-
   
   ngOnInit(): void {
     this.form = this.rootFormGroup.control;
@@ -36,6 +34,14 @@ export class FieldsComponent implements OnInit {
 
   deleteField(fieldIndex: number) {
     this.fields.removeAt(fieldIndex);
+  }
+
+  guessIt() {
+    if (this.form.invalid) {
+      console.log('Form: erros in form');
+      this.form.markAllAsTouched();
+      console.log('Form:' + JSON.stringify(this.form.value));
+    }
   }
 
 }
