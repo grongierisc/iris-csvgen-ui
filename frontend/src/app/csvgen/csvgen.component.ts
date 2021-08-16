@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder,Validators } from '@angular/forms';
 import { CsvgenService } from "../service/csvgen.service"
-
+import { UploaderComponent } from '../uploader/uploader.component';
 
 @Component({
   selector: 'app-csvgen',
@@ -9,6 +9,9 @@ import { CsvgenService } from "../service/csvgen.service"
   styleUrls: ['./csvgen.component.scss']
 })
 export class CsvgenComponent implements OnInit {
+
+  @ViewChild(UploaderComponent)
+  uploader!: UploaderComponent;
 
   myForm!: FormGroup;
   pattern = "^[a-zA-Z0-9]+[\.][a-zA-Z0-9.]+[a-zA-Z0-9]$";
@@ -54,6 +57,9 @@ export class CsvgenComponent implements OnInit {
 
   resetForm() { 
     this.myForm.reset();
+    this.myForm.setControl('fields',this.fb.array([
+    ]));
+    this.uploader.file = null;
 }
 
 }

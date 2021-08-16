@@ -5,7 +5,12 @@
     <app-uploader formGroupName="uploader"></app-uploader>
     <app-informations formGroupName="informations"></app-informations>
     <app-fields formGroupName="fields"></app-fields>
-    <button type="submit">Submit</button>
+    <p></p>
+    <div class="example-button-row">
+        <button mat-raised-button color="primary" type="submit">Submit</button>
+        <button mat-raised-button type='button' (click)="resetForm()">Reset</button>
+    </div>
+    
 </form>
 
 </div>
