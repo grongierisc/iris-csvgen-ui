@@ -1,5 +1,5 @@
 import { Component, OnInit, Input} from '@angular/core';
-import { FormControl, FormGroup,FormGroupDirective } from '@angular/forms';
+import { FormGroup,FormGroupDirective } from '@angular/forms';
 
 @Component({
   selector: 'app-uploader',
