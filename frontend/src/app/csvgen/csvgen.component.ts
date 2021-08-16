@@ -20,7 +20,7 @@ export class CsvgenComponent implements OnInit {
         className : ['',[Validators.required, Validators.pattern(this.pattern)]]
       }),
       uploader : this.fb.group({
-        file : [File,[Validators.required]]
+        file : ['',[Validators.required]]
       }),
       fields : this.fb.array([
       ]),

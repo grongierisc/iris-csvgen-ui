@@ -58,7 +58,11 @@ export class FieldsComponent implements OnInit {
   }
 
   guessIt() {
-
+      if (this.form.get('uploader')?.get('file')?.invalid) {
+        console.log('Form: erros in form');
+        this.form.get('uploader')?.get('file')?.markAsTouched();
+        return;
+      }
       console.log('Form:' + JSON.stringify(this.form.value));
 
       let body = JSON.stringify(this.form.value);
