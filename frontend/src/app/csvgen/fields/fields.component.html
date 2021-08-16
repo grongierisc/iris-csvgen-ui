@@ -9,9 +9,9 @@
         </mat-panel-description>
     </mat-expansion-panel-header>
     <form autocomplete="off" [formGroup]="form">
-      <ng-container formArrayName="fields">
+      <ng-container formArrayName="fields" class="panel-center">
         <ng-container *ngFor="let fieldForm of fields.controls; let i = index">
-            <div [formGroupName]="i">
+            <div [formGroupName]="i" class="row">
                 <mat-form-field appearance="fill">
                     <input matInput color="primary"
                            formControlName="column"
