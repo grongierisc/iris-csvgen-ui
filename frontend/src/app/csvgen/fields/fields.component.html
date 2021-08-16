@@ -1,11 +1,11 @@
-<mat-expansion-panel  hideToggle  (opened)="panelOpenState = true"
+<mat-expansion-panel #accordion hideToggle  (opened)="panelOpenState = true"
                                   (closed)="panelOpenState = false">
     <mat-expansion-panel-header>
         <mat-panel-title class="panel-center">
             Columns :
         </mat-panel-title>
         <mat-panel-description>
-            <button type='button' mat-button (click)="guessIt()">Guess it !</button>
+            <button type='button' type='button' mat-button (click)="guessIt()">Guess it !</button>
         </mat-panel-description>
     </mat-expansion-panel-header>
     <form autocomplete="off" [formGroup]="form">

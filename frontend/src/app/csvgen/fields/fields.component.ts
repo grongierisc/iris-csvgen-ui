@@ -1,8 +1,9 @@
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Input, ViewChild} from '@angular/core';
 import { FormBuilder, FormGroup,FormGroupDirective,FormArray,Validators } from '@angular/forms';
 import { CsvgenService } from "../../service/csvgen.service"
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { MatExpansionPanel } from '@angular/material/expansion';
 
 @Component({
   selector: 'app-fields',
@@ -12,6 +13,7 @@ import { map, startWith } from 'rxjs/operators';
 export class FieldsComponent implements OnInit {
 
   @Input() formArrayName!: string;
+  @ViewChild('accordion') accordion!: MatExpansionPanel;
 
   form!: FormGroup;
   panelOpenState = false;
@@ -36,7 +38,6 @@ export class FieldsComponent implements OnInit {
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
-    //return this.options
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
 
@@ -58,11 +59,13 @@ export class FieldsComponent implements OnInit {
   }
 
   guessIt() {
+
       if (this.form.get('uploader')?.get('file')?.invalid) {
         console.log('Form: erros in form');
         this.form.get('uploader')?.get('file')?.markAsTouched();
         return;
       }
+
       console.log('Form:' + JSON.stringify(this.form.value));
 
       let body = JSON.stringify(this.form.value);
@@ -74,6 +77,7 @@ export class FieldsComponent implements OnInit {
       
       this.csvgenService.guessit(payload).subscribe((data: any[]) => {
         this.fields.clear();
+        this.accordion.open()
         data.forEach(element => {
           this.addField(element.column,element.type);
         });
