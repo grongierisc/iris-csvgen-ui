@@ -13,6 +13,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -33,6 +34,7 @@ import { FieldsComponent } from './csvgen/fields/fields.component';
   imports: [
     BrowserModule,
     MatButtonModule,
+    MatAutocompleteModule,
     MatIconModule,
     MatSelectModule,
     MatExpansionModule,

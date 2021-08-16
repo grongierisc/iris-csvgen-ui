@@ -1,6 +1,8 @@
 import { Component, OnInit, Input} from '@angular/core';
 import { FormBuilder, FormGroup,FormGroupDirective,FormArray,Validators } from '@angular/forms';
 import { CsvgenService } from "../../service/csvgen.service"
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-fields',
@@ -11,14 +13,31 @@ export class FieldsComponent implements OnInit {
 
   @Input() formArrayName!: string;
 
-  formArray!: FormArray;
   form!: FormGroup;
   panelOpenState = false;
+
+  options: string[] = ['VARCHAR(250)', 'VARCHAR', 'DOUBLE', 'MONEY', 'INTEGER', 'DATE'];
+  filteredOptions: Observable<string[]>[] = [];
 
   constructor(private rootFormGroup: FormGroupDirective,private fb: FormBuilder,private csvgenService: CsvgenService) {}
   
   ngOnInit(): void {
     this.form = this.rootFormGroup.control;
+  }
+
+  private _manageNameControl(index: number) {
+    this.filteredOptions[index] = this.fields.at(index).get('type')?.valueChanges
+      .pipe(
+        startWith<string>(''),
+        map(value => this._filter(value))
+      )!;
+
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    //return this.options
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
 
   get fields() {
@@ -31,6 +50,7 @@ export class FieldsComponent implements OnInit {
       type: [type, Validators.required]
     });
     this.fields.push(fieldForm);
+    this._manageNameControl(this.fields.length - 1);
   }
 
   deleteField(fieldIndex: number) {
@@ -61,3 +81,5 @@ export class FieldsComponent implements OnInit {
   
 
 }
+
+

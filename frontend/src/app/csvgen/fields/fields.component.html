@@ -18,15 +18,15 @@
                            placeholder="Column name">
                 </mat-form-field>
                 <mat-form-field appearance="fill">
-                    <mat-select formControlName="type"
-                            placeholder="Type">
-                        <mat-option value="VARCHAR">VARCHAR</mat-option>
-                        <mat-option value="VARCHAR(250)">VARCHAR(250)</mat-option>
-                        <mat-option value="INTEGER">INTEGER</mat-option>
-                        <mat-option value="DOUBLE">DOUBLE</mat-option>
-                        <mat-option value="DATE">DATE</mat-option>
-                        <mat-option value="MONEY">MONEY</mat-option>
-                    </mat-select>
+                  <input matInput color="primary"
+                  formControlName="type"
+                  placeholder="Type"
+                  [matAutocomplete]="auto">
+                  <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of filteredOptions[i] | async" [value]="option">
+                      {{option}}
+                    </mat-option>
+                  </mat-autocomplete>
                 </mat-form-field>
                 <mat-icon (click)="deleteField(i)">
                     delete_forever</mat-icon>
