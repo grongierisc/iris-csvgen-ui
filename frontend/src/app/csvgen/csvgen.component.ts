@@ -14,6 +14,8 @@ export class CsvgenComponent implements OnInit {
   @ViewChild(UploaderComponent)
   uploader!: UploaderComponent;
 
+  progressSpinner: boolean = false;
+
   myForm!: FormGroup;
   pattern = "^[a-zA-Z0-9]+[\.][a-zA-Z0-9.]+[a-zA-Z0-9]$";
 
@@ -47,11 +49,14 @@ export class CsvgenComponent implements OnInit {
       payload.append("body",body)
       payload.append("file",file)
       
+      this.progressSpinner = true;
       this.csvgenService.importng(payload).subscribe((data: any) => {
         console.log(data);
         this.openSnackBar('File imported ('+data.nbRowImported+' rows) with class name : '+data.className ,'Done');
+        this.progressSpinner = false;
       },(error: any) => {
         console.log(error);
+        this.progressSpinner = false;
         alert(JSON.stringify(error.error));
       });
     }

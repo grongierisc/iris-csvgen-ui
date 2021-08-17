@@ -18,6 +18,8 @@ export class FieldsComponent implements OnInit {
   form!: FormGroup;
   panelOpenState = false;
 
+  progressSpinner: boolean = false;
+
   options: string[] = ['VARCHAR(250)', 'VARCHAR(5000)', 'DOUBLE', 'MONEY', 'INTEGER', 'DATE', 'TIMESTAMP', 'POSIXTIME'];
   filteredOptions: Observable<string[]>[] = [];
 
@@ -67,6 +69,8 @@ export class FieldsComponent implements OnInit {
         return;
       }
 
+      this.progressSpinner = true;
+
       console.log('Form:' + JSON.stringify(this.form.value));
 
       let body = JSON.stringify(this.form.value);
@@ -82,8 +86,10 @@ export class FieldsComponent implements OnInit {
         data.forEach(element => {
           this.addField(element.column,element.type);
         });
+        this.progressSpinner = false;
         console.log('Form:' + JSON.stringify(this.form.value));
       },(error: any) => {
+        this.progressSpinner = false;
         alert(JSON.stringify(error.error));
       });
     }

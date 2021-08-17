@@ -14,6 +14,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatDialogModule } from '@angular/material/dialog'; 
 
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -22,6 +23,7 @@ import { CsvgenComponent } from './csvgen/csvgen.component';
 import { UploaderComponent } from './csvgen/uploader/uploader.component';
 import { InformationsComponent } from './csvgen/informations/informations.component';
 import { FieldsComponent } from './csvgen/fields/fields.component';
+import { SpinnerComponent,DialogSpinnerComponent } from './spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { FieldsComponent } from './csvgen/fields/fields.component';
     CsvgenComponent,
     UploaderComponent,
     InformationsComponent,
-    FieldsComponent
+    FieldsComponent,
+    SpinnerComponent,
+    DialogSpinnerComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +49,8 @@ import { FieldsComponent } from './csvgen/fields/fields.component';
     HttpClientModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
