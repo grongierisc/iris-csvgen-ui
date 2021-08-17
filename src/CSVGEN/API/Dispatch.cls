@@ -18,6 +18,8 @@ XData UrlMap [ XMLNamespace = "http://www.intersystems.com/urlmap" ]
   <!-- Get this spec -->
   <Route Url="/import" Method="post" Call="Import" />
   <Route Url="/importng" Method="post" Call="ImportNG" />
+  <Route Url="/importngasync" Method="post" Call="ImportNGAsync" />
+  <Route Url="/jobs/:jobkey" Method="get" Call="GetJob" />
   <Route Url="/guessit" Method="post" Call="GuessIt" />
 </Routes>
 }
@@ -77,6 +79,60 @@ ClassMethod ImportNG() As %Status
   }
 
   Quit $$$OK
+}
+
+/// Wrapper of csvgen
+ClassMethod CsvGenWrapper(filename, dynaBody) As %Library.DynamicObject
+{
+    set dynaBody = {}.%FromJSON(dynaBody)
+    do ..DynaToGuess(dynaBody.fields,.rowType)
+    set ^pguess = rowType
+
+    $$$ThrowOnError(##class(community.csvgen).Generate(filename,dynaBody.informations.separator,dynaBody.informations.className,.rowType,1,.nbRowImported,0))
+
+    set tDyna = {}
+    set tDyna.className = dynaBody.informations.className
+    set tDyna.nbRowImported = nbRowImported
+    do ..GuessToDyna(rowType,.dyna)
+    set tDyna.fields = dyna
+
+    return tDyna
+}
+
+ClassMethod ImportNGAsync() As %Status
+{
+  #dim %request As %CSP.Request
+  #dim stream As %CSP.BinaryStream
+
+  Try {
+
+    do ..Validate(.dynaBody,.stream)
+    
+
+    $$$ThrowOnError(##class(community.csvgen).StreamToFile(stream,.filename))
+
+    set jobKey = ##class(Grongier.Rest.Async.API).RunInBackgroundAndReturnJobKey("CSVGEN.API.Dispatch","CsvGenWrapper",filename, dynaBody.%ToJSON())
+
+    //$$$ThrowOnError(##class(community.csvgen).Generate(filename,dynaBody.informations.separator,dynaBody.informations.className,.rowType,1,.nbRowImported,0))
+
+    set tDyna = {}
+    set tDyna.jobKey = jobKey
+
+    w tDyna.%ToJSON()
+
+  } Catch ex {
+      Return ex.AsStatus()
+  }
+
+  Quit $$$OK
+}
+
+ClassMethod GetJob(jobkey) As %Status
+{
+  Set sc = $$$OK
+  set tJobRecord = ##class(Grongier.Rest.Async.API).GetJobRecordFromKey(jobkey)
+  zw tJobRecord.%JSONExport()
+  Return sc
 }
 
 ClassMethod Info() As %Status
