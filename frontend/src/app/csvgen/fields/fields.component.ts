@@ -18,7 +18,7 @@ export class FieldsComponent implements OnInit {
   form!: FormGroup;
   panelOpenState = false;
 
-  options: string[] = ['VARCHAR(250)', 'VARCHAR', 'DOUBLE', 'MONEY', 'INTEGER', 'DATE'];
+  options: string[] = ['VARCHAR(250)', 'VARCHAR(5000)', 'DOUBLE', 'MONEY', 'INTEGER', 'DATE'];
   filteredOptions: Observable<string[]>[] = [];
 
   constructor(private rootFormGroup: FormGroupDirective,private fb: FormBuilder,private csvgenService: CsvgenService) {}
