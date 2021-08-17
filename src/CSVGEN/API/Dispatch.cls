@@ -105,7 +105,7 @@ ClassMethod GuessIt() As %Status
 ClassMethod GuessToDyna(pGuess As %String, ByRef pDyna As %DynamicArray, pSeparator As %String = ",") As %Status
 {
   Set sc = $$$OK
-  set pGuess = "survived INTEGER,pclass INTEGER,name VARCHAR(250),sex VARCHAR(250),age INTEGER,sibSp INTEGER,parCh INTEGER,ticket VARCHAR(250),fare MONEY,cabin VARCHAR(250),embarked VARCHAR(250)"
+  //set pGuess = "survived INTEGER,pclass INTEGER,name VARCHAR(250),sex VARCHAR(250),age INTEGER,sibSp INTEGER,parCh INTEGER,ticket VARCHAR(250),fare MONEY,cabin VARCHAR(250),embarked VARCHAR(250)"
   set pDyna = []
   for i = 1:1:$l(pGuess,pSeparator) {
     set h = $p(pGuess,pSeparator,i)

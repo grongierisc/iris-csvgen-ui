@@ -60,9 +60,10 @@ export class FieldsComponent implements OnInit {
 
   guessIt() {
 
-      if (this.form.get('uploader')?.get('file')?.invalid) {
+      if (this.form.get('uploader')?.get('file')?.invalid || this.form.get('informations')?.get('separator')?.invalid) {
         console.log('Form: erros in form');
         this.form.get('uploader')?.get('file')?.markAsTouched();
+        this.form.get('informations')?.get('separator')?.markAsTouched();
         return;
       }
 
