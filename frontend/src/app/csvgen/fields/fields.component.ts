@@ -18,7 +18,7 @@ export class FieldsComponent implements OnInit {
   form!: FormGroup;
   panelOpenState = false;
 
-  options: string[] = ['VARCHAR(250)', 'VARCHAR(5000)', 'DOUBLE', 'MONEY', 'INTEGER', 'DATE'];
+  options: string[] = ['VARCHAR(250)', 'VARCHAR(5000)', 'DOUBLE', 'MONEY', 'INTEGER', 'DATE', 'TIMESTAMP', 'POSIXTIME'];
   filteredOptions: Observable<string[]>[] = [];
 
   constructor(private rootFormGroup: FormGroupDirective,private fb: FormBuilder,private csvgenService: CsvgenService) {}
@@ -84,7 +84,7 @@ export class FieldsComponent implements OnInit {
         });
         console.log('Form:' + JSON.stringify(this.form.value));
       },(error: any) => {
-        console.log(error);
+        alert(JSON.stringify(error.error));
       });
     }
   

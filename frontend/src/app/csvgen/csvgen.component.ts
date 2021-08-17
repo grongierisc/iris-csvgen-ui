@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder,Validators } from '@angular/forms';
 import { CsvgenService } from "../service/csvgen.service"
-import { UploaderComponent } from '../uploader/uploader.component';
+import { UploaderComponent } from './uploader/uploader.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-csvgen',
@@ -16,7 +17,7 @@ export class CsvgenComponent implements OnInit {
   myForm!: FormGroup;
   pattern = "^[a-zA-Z0-9]+[\.][a-zA-Z0-9.]+[a-zA-Z0-9]$";
 
-  constructor(private fb: FormBuilder,private csvgenService: CsvgenService) {
+  constructor(private fb: FormBuilder,private csvgenService: CsvgenService,private _snackBar: MatSnackBar) {
     this.myForm = this.fb.group({
       informations : this.fb.group({ 
         separator : ['',[Validators.required]],
@@ -48,11 +49,17 @@ export class CsvgenComponent implements OnInit {
       
       this.csvgenService.importng(payload).subscribe((data: any) => {
         console.log(data);
+        this.openSnackBar('File imported ('+data.nbRowImported+' rows) with class name : '+data.className ,'Done');
       },(error: any) => {
         console.log(error);
+        alert(JSON.stringify(error.error));
       });
     }
     
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action);
   }
 
   resetForm() { 

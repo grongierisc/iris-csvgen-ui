@@ -19,7 +19,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { CsvgenComponent } from './csvgen/csvgen.component';
-import { UploaderComponent } from './uploader/uploader.component';
+import { UploaderComponent } from './csvgen/uploader/uploader.component';
 import { InformationsComponent } from './csvgen/informations/informations.component';
 import { FieldsComponent } from './csvgen/fields/fields.component';
 
