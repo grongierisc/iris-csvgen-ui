@@ -20,7 +20,7 @@ export class FieldsComponent implements OnInit {
 
   progressSpinner: boolean = false;
 
-  options: string[] = ['VARCHAR(250)', 'VARCHAR(5000)', 'DOUBLE', 'MONEY', 'INTEGER', 'DATE', 'TIMESTAMP', 'POSIXTIME'];
+  options: string[] = ['VARCHAR(250)', 'VARCHAR(5000)', 'DOUBLE', 'INTEGER', 'DATE', 'TIMESTAMP', 'POSIXTIME', "%String",'%String(MAXLEN="400")',"%VarChar","%TimeStamp",'%Date(FORMAT=5)'];
   filteredOptions: Observable<string[]>[] = [];
 
   constructor(private rootFormGroup: FormGroupDirective,private fb: FormBuilder,private csvgenService: CsvgenService) {}

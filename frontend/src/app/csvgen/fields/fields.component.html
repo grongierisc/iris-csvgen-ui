@@ -21,7 +21,8 @@
                   <input matInput color="primary"
                   formControlName="type"
                   placeholder="Type"
-                  [matAutocomplete]="auto">
+                  [matAutocomplete]="auto"
+                  matTooltip='Can be any SQL type or IRIS type, eg: %String(MAXLEN="400"), %Date(FORMAT="1") '>
                   <mat-autocomplete #auto="matAutocomplete">
                     <mat-option *ngFor="let option of filteredOptions[i] | async" [value]="option">
                       {{option}}

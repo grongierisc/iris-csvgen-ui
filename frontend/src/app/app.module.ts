@@ -15,6 +15,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDialogModule } from '@angular/material/dialog'; 
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -38,6 +39,7 @@ import { SpinnerComponent,DialogSpinnerComponent } from './spinner/spinner.compo
   imports: [
     BrowserModule,
     MatButtonModule,
+    MatTooltipModule,
     MatAutocompleteModule,
     MatIconModule,
     MatSelectModule,
