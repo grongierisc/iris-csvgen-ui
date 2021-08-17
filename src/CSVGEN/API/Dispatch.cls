@@ -59,6 +59,9 @@ ClassMethod ImportNG() As %Status
 
     $$$ThrowOnError(##class(community.csvgen).StreamToFile(stream,.filename))
 
+    do ..DynaToGuess(dynaBody.fields,.rowType)
+    set ^pguess = rowType
+
     $$$ThrowOnError(##class(community.csvgen).Generate(filename,dynaBody.informations.separator,dynaBody.informations.className,.rowType,1,.nbRowImported,0))
 
     set tDyna = {}
