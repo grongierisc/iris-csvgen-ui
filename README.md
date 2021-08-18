@@ -26,13 +26,13 @@ http://localhost:52773/csp/{namespace}/csvgen/index.html
 
 ## Demo
 
-![Demo](/misc/UploadDemo.gif)
+![Demo](https://raw.githubusercontent.com/grongierisc/iris-csvgen-ui/master/misc/UploadDemo.gif)
 
 ## New Feature
 
 Guess It !
 
-![Demo](/misc/NewFeatureGuessIt.gif)
+![Demo](https://raw.githubusercontent.com/grongierisc/iris-csvgen-ui/master/misc/NewFeatureGuessIt.gif)
 
 # Misc
 Visual Studio Directory Structure
