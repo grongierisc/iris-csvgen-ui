@@ -1,14 +1,3 @@
-# TODO 
-
-- [x] Add drag and drop
-- [ ] Add Oauth
-- [ ] Add navbar
-- [x] Finish server side
-- [x] ZPM module
-- [x] Update readme
-- [x] Import from url
-- [x] Advence parameter
-
 # Introduction 
 This is a csvgen UI frontend in Angular 8.
 The aim of this project is to easily import csv file to Iris from a web ui.
@@ -39,18 +28,22 @@ http://localhost:52773/csp/{namespace}/csvgen/index.html
 
 ![Demo](/misc/UploadDemo.gif)
 
+## New Feature
+
+Guess It !
+
+![Demo](/misc/NewFeatureGuessIt.gif)
 
 # Misc
 Visual Studio Directory Structure
 
 ```
 .
-├── front
+├── frontend
 │   ├── e2e
 │   │   └── src
 │   └── src
-│       ├── app
-│       │   └── file-upload
+│       ├── csvgen
 │       ├── assets
 │       └── environments
 └── src
@@ -59,3 +52,13 @@ Visual Studio Directory Structure
 ```
 Where front is the angular UI dans src is le backend source code for IRIS.
 
+# TODO 
+
+- [x] Add drag and drop
+- [ ] Add Oauth
+- [ ] Add navbar
+- [x] Finish server side
+- [x] ZPM module
+- [x] Update readme
+- [x] Import from url
+- [x] Advence parameter
