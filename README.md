@@ -7,7 +7,7 @@
 - [x] ZPM module
 - [x] Update readme
 - [x] Import from url
-- [ ] Advence parameter
+- [x] Advence parameter
 
 # Introduction 
 This is a csvgen UI frontend in Angular 8.
