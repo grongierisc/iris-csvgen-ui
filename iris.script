@@ -5,7 +5,7 @@
     zn "IRISAPP"
 
     zpm
-    install "csvgen-ui"
+    load "/opt/irisapp"
     q
 
     zn "%SYS"
