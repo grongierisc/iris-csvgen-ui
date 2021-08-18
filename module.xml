@@ -3,7 +3,7 @@
   <Document name="csvgen-ui.ZPM">
     <Module>
       <Name>csvgen-ui</Name>
-      <Version>1.0.3</Version>
+      <Version>2.0.0</Version>
       <Description>An angular frontend for Csvgen app.</Description>
       <Keywords>REST,Full-stack,angular</Keywords>
       <Packaging>module</Packaging>
@@ -13,7 +13,7 @@
           <Version>*</Version>
         </ModuleReference>
       </Dependencies>
-      <CSPApplication CookiePath="/csp/${namespace}/csvgen" DefaultTimeout="900" DeployPath="${cspdir}/csvgen" MatchRoles=":${dbrole}" PasswordAuthEnabled="0" Recurse="1" ServeFiles="1" ServeFilesTimeout="3600" SourcePath="/front/dist/csvgen-ui" UnauthenticatedEnabled="1" Url="/csp/${namespace}/csvgen" UseSessionCookie="2"/>
+      <CSPApplication CookiePath="/csp/${namespace}/csvgen" DefaultTimeout="900" DeployPath="${cspdir}/csvgen" MatchRoles=":${dbrole}" PasswordAuthEnabled="0" Recurse="1" ServeFiles="1" ServeFilesTimeout="3600" SourcePath="/frontend/dist/frontend" UnauthenticatedEnabled="1" Url="/csp/${namespace}/csvgen" UseSessionCookie="2"/>
       <SourcesRoot>src</SourcesRoot>
       <Resource Directory="cls" Name="CSVGEN.PKG"/>
       <CSPApplication CookiePath="/api/${namespace}/csvgen/" DefaultTimeout="900" DispatchClass="CSVGEN.API.Dispatch" MatchRoles=":%All" PasswordAuthEnabled="0" Recurse="1" ServeFiles="1" ServeFilesTimeout="3600" UnauthenticatedEnabled="1" Url="/api/${namespace}/csvgen" UseSessionCookie="2"/>
