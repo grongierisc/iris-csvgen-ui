@@ -41,6 +41,37 @@ export class CsvgenService {
     return result
   }
 
+  importngAsync(formData: any) : any {
+
+    let url = location.toString()
+    // point to API
+    url = url.replace('csp','api')
+    // trim index.html
+    var re = new RegExp(/^.*\//);
+    url = re.exec(url)?.toString()!;
+    if (!environment.production) {
+      url = 'http://localhost:52774/api/IRISAPP/csvgen/'
+    }
+    var result = this.http.post(url+'importngasync', formData)
+    return result
+  }
+
+  getjob(jobkey : string) : any {
+
+    let url = location.toString()
+    // point to API
+    url = url.replace('csp','api')
+    // trim index.html
+    var re = new RegExp(/^.*\//);
+    url = re.exec(url)?.toString()!;
+    if (!environment.production) {
+      url = 'http://localhost:52774/api/IRISAPP/csvgen/'
+    }
+    var result = this.http.get(url+'jobs/'+jobkey)
+    return result
+
+  }
+
   guessit(formData: any): any {
 
     let url = location.toString()

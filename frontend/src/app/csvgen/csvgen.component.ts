@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder,Validators } from '@angular/forms';
 import { CsvgenService } from "../service/csvgen.service"
 import { UploaderComponent } from './uploader/uploader.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { interval } from 'rxjs/internal/observable/interval';
 
 @Component({
   selector: 'app-csvgen',
@@ -50,10 +51,26 @@ export class CsvgenComponent implements OnInit {
       payload.append("file",file)
       
       this.progressSpinner = true;
-      this.csvgenService.importng(payload).subscribe((data: any) => {
+      this.csvgenService.importngAsync(payload).subscribe((data: any) => {
         console.log(data);
-        this.openSnackBar('File imported ('+data.nbRowImported+' rows) with class name : '+data.className ,'Done');
-        this.progressSpinner = false;
+        const intervalObservable = interval(2000).subscribe( _ => {
+          this.csvgenService.getjob(data.jobKey).subscribe((response :any) => { 
+
+            if (response.Status === 'complete' ) {
+                intervalObservable.unsubscribe()
+                this.openSnackBar('File imported ('+response.Result.nbRowImported+' rows) with class name : '+response.Result.className ,'Done');
+                this.progressSpinner = false;
+            };
+            if (response.Status === 'error' || response.Status === 'internal_error' ) {
+                intervalObservable.unsubscribe()
+                this.progressSpinner = false;
+                alert(JSON.stringify(response));
+            };
+
+          });
+
+        });
+
       },(error: any) => {
         console.log(error);
         this.progressSpinner = false;
