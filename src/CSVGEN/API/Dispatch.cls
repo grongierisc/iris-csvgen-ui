@@ -131,7 +131,7 @@ ClassMethod GetJob(jobkey) As %Status
 {
   Set sc = $$$OK
   set tJobRecord = ##class(Grongier.Rest.Async.API).GetJobRecordFromKey(jobkey)
-  zw tJobRecord.%JSONExport()
+  w:($IsObject(tJobRecord)) tJobRecord.%ToJSON()
   Return sc
 }
 
