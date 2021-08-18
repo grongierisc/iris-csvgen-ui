@@ -48,10 +48,10 @@ Property Result As %Stream.GlobalCharacter;
 Property WrittenOutput As %Stream.GlobalCharacter;
 
 /// Start time of job (i.e. when job is requested)
-Property StartTime As Ens.DataType.UTC [ InitialExpression = {$$$CurrentTime}, ReadOnly, Required ];
+Property StartTime As %TimeStamp [ InitialExpression = {$$$CurrentTime}, ReadOnly, Required ];
 
 /// End time of job
-Property EndTime As Ens.DataType.UTC;
+Property EndTime As %TimeStamp;
 
 Index JobIdIdx On (JobId, Counter) [ IdKey ];
 
