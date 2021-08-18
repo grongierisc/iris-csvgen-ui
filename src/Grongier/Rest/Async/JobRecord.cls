@@ -75,6 +75,17 @@ XData BasicReference [ XMLNamespace = "http://www.intersystems.com/jsonmapping" 
 </Mapping>
 }
 
+Method %ToJSON() As %String
+{
+
+	do ..%JSONExportToString(.json)
+	set dyna = {}.%FromJSON(json)
+	//Cast JsonString to DynaObject
+	set:(dyna.Result'="") dyna.Result = {}.%FromJSON(dyna.Result)
+
+	Return dyna.%ToJSON()
+}
+
 Method %OnNew(pClassname As %Dictionary.Classname, pMethodName As %Dictionary.Identifier, pArgumentList As %Library.List) As %Status [ Private, ServerOnly = 1 ]
 {
 	Set ..Classname = pClassname
