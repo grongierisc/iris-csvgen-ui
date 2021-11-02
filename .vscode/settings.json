@@ -12,7 +12,8 @@
       "docker-compose": {
         "service": "iris",
         "internalPort": 52773
-      }
+      },
+      "links": {"demo":"http://localhost:52774/csp/irisapp/csvgen/index.html"}
     }
 
 }
